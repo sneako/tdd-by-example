@@ -1,6 +1,6 @@
 <?php namespace TDD;
 
-abstract class Money
+class Money
 {
     protected $amount;
     protected $currency;
@@ -18,9 +18,14 @@ abstract class Money
 
     public function equals($money)
     {
-        return $this == $money;
+        return $this->amount == $money->amount && $this->currency() == $money->currency;
     }
 
+    public function times($multiplier)
+    {
+       return new Money($this->amount * $multiplier, $this->currency);
+    }
+    
     public static function dollar($amount)
     {
         return new Dollar($amount, "USD");
