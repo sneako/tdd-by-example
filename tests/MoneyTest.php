@@ -1,29 +1,24 @@
-<?php
+<?php 
 use TDD\Money;
 use TDD\Dollar;
 use TDD\Franc;
+use TDD\Bank;
 
-class MoneyTest extends PHPUnit_Framework_TestCase
+class MeneyTest extends PHPUnit_Framework_TestCase
 {
     public function testMultiplication()
     {
         $five = Money::dollar(5);
         $this->assertTrue($five->times(2)->equals(Money::dollar(10)));
         $this->assertTrue($five->times(3)->equals(Money::dollar(15)));
-        $five = Money::franc(5);
-        $this->assertTrue($five->times(2)->equals(Money::franc(10)));
-        $this->assertTrue($five->times(3)->equals(Money::franc(15)));
     }
 
     public function testEquals()
     {
-        $dollar = Money::dollar(5);
-        $this->assertTrue($dollar->equals(Money::dollar(5)));
-        $this->assertFalse($dollar->equals(Money::dollar(6)));
-        $dollar = Money::franc(5);
-        $this->assertTrue($dollar->equals(Money::franc(5)));
-        $this->assertFalse($dollar->equals(Money::franc(6)));
-        $this->assertFalse($dollar->equals(Money::dollar(6)));
+        $five_dollars = Money::dollar(5);
+        $this->assertTrue($five_dollars->equals(Money::dollar(5)));
+        $this->assertFalse($five_dollars->equals(Money::franc(6)));
+        $this->assertFalse($five_dollars->equals(Money::dollar(6)));
     }
 
     public function testCurrency()
@@ -32,10 +27,13 @@ class MoneyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("CHF", Money::franc(1)->currency());
     }
 
-    public function testDifferentClassEquality()
+    public function testSimpleAddition()
     {
-        $five = new Money(5, "CHF");
-        $this->assertTrue($five->equals(new Franc(5, "CHF")));
+        $five = Money::dollar(5);
+        $sum  = $five->plus($five);
+        $bank = new Bank();
+        $reduced = $bank->reduce($sum, "USD");
+        $this->assertEquals(Money::dollar(10), $reduced);
     }
 }
 

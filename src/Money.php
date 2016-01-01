@@ -5,9 +5,9 @@ class Money
     protected $amount;
     protected $currency;
 
-    public function __construct($amount, $currency = null)
+    public function __construct($amount, $currency)
     {
-        $this->amount = $amount;
+        $this->amount   = $amount;
         $this->currency = $currency;
     }
 
@@ -16,7 +16,7 @@ class Money
         return $this->currency;
     }
 
-    public function equals($money)
+    public function equals(Money $money)
     {
         return $this->amount == $money->amount && $this->currency() == $money->currency;
     }
@@ -26,6 +26,11 @@ class Money
        return new Money($this->amount * $multiplier, $this->currency);
     }
     
+    public function plus(Money $add)
+    {
+        return new Money($this->amount + $add->amount, $this->currency);
+    }
+
     public static function dollar($amount)
     {
         return new Money($amount, "USD");
