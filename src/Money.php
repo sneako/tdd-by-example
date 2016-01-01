@@ -1,8 +1,8 @@
 <?php namespace TDD;
 
-class Money
+class Money implements Expression
 {
-    protected $amount;
+    public $amount;
     protected $currency;
 
     public function __construct($amount, $currency)
@@ -26,9 +26,9 @@ class Money
        return new Money($this->amount * $multiplier, $this->currency);
     }
     
-    public function plus(Money $add)
+    public function plus(Money $addend)
     {
-        return new Money($this->amount + $add->amount, $this->currency);
+        return new Sum($this, $addend);
     }
 
     public static function dollar($amount)

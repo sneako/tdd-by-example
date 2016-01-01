@@ -3,6 +3,7 @@ use TDD\Money;
 use TDD\Dollar;
 use TDD\Franc;
 use TDD\Bank;
+use TDD\Sum;
 
 class MeneyTest extends PHPUnit_Framework_TestCase
 {
@@ -34,6 +35,22 @@ class MeneyTest extends PHPUnit_Framework_TestCase
         $bank = new Bank();
         $reduced = $bank->reduce($sum, "USD");
         $this->assertEquals(Money::dollar(10), $reduced);
+    }
+
+    public function testPlusReturnsSum()
+    {
+        $five = Money::dollar(5);
+        $result = $five->plus($five);
+        $this->assertEquals($five, $result->augend);
+        $this->assertEquals($five, $result->addend);
+    }   
+
+    public function testReduceSum()
+    {
+        $sum = new Sum(Money::dollar(3), Money::dollar(4));
+        $bank = new Bank();
+        $result = $bank->reduce($sum, "USD");
+        $this->assertEquals(Money::dollar(7), $result);
     }
 }
 
