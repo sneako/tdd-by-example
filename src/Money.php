@@ -28,12 +28,12 @@ class Money
     
     public static function dollar($amount)
     {
-        return new Dollar($amount, "USD");
+        return new Money($amount, "USD");
     }
 
     public static function franc($amount)
     {
-        return new Franc($amount, "CHF");
+        return new Money($amount, "CHF");
     }
 
 }
