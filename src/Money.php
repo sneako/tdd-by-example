@@ -41,5 +41,10 @@ class Money implements Expression
         return new Money($amount, "CHF");
     }
 
+    public function reduce($bank, $to)
+    {
+        $rate = ($this->currency == "CHF" && $to == "USD") ? 2 : 1;
+        return new Money($this->amount / $rate, $to);
+    }
 }
 
