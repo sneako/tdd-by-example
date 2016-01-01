@@ -2,16 +2,17 @@
 
 abstract class Money
 {
-    public function __construct($amount)
-    {
-        $this->amount = $amount;
-    }
-    
-    public abstract function currency();
+    protected $amount;
+    protected $currency;
 
-    public function equals($dollar)
+    public function currency()
     {
-        return $this == $dollar;
+        return $this->currency;
+    }
+
+    public function equals($money)
+    {
+        return $this == $money;
     }
 
     public static function dollar($amount)
