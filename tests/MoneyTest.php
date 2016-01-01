@@ -1,13 +1,18 @@
 <?php
+use TDD\Money;
 use TDD\Dollar;
+use TDD\Franc;
 
-class DollarTest extends PHPUnit_Framework_TestCase
+class MoneyTest extends PHPUnit_Framework_TestCase
 {
     public function testMultiplication()
     {
         $five = new Dollar(5);
         $this->assertEquals($five->times(2), new Dollar(10));
         $this->assertEquals($five->times(3), new Dollar(15));
+        $five = new Franc(5);
+        $this->assertEquals($five->times(2), new Franc(10));
+        $this->assertEquals($five->times(3), new Franc(15));
     }
 
     public function testEquals()
@@ -15,6 +20,9 @@ class DollarTest extends PHPUnit_Framework_TestCase
         $dollar = new Dollar(5);
         $this->assertTrue($dollar->equals(new Dollar(5)));
         $this->assertFalse($dollar->equals(new Dollar(6)));
+        $dollar = new Franc(5);
+        $this->assertTrue($dollar->equals(new Franc(5)));
+        $this->assertFalse($dollar->equals(new Franc(6)));
     }
 }
 
