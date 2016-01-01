@@ -7,9 +7,9 @@ class MoneyTest extends PHPUnit_Framework_TestCase
 {
     public function testMultiplication()
     {
-        $five = new Dollar(5);
-        $this->assertEquals($five->times(2), new Dollar(10));
-        $this->assertEquals($five->times(3), new Dollar(15));
+        $five = Money::dollar(5);
+        $this->assertEquals($five->times(2), Money::dollar(10));
+        $this->assertEquals($five->times(3), Money::dollar(15));
         $five = new Franc(5);
         $this->assertEquals($five->times(2), new Franc(10));
         $this->assertEquals($five->times(3), new Franc(15));
@@ -17,13 +17,13 @@ class MoneyTest extends PHPUnit_Framework_TestCase
 
     public function testEquals()
     {
-        $dollar = new Dollar(5);
-        $this->assertTrue($dollar->equals(new Dollar(5)));
-        $this->assertFalse($dollar->equals(new Dollar(6)));
+        $dollar = Money::dollar(5);
+        $this->assertTrue($dollar->equals(Money::dollar(5)));
+        $this->assertFalse($dollar->equals(Money::dollar(6)));
         $dollar = new Franc(5);
         $this->assertTrue($dollar->equals(new Franc(5)));
         $this->assertFalse($dollar->equals(new Franc(6)));
-        $this->assertFalse($dollar->equals(new Dollar(5)));
+        $this->assertFalse($dollar->equals(Money::dollar(6)));
     }
 }
 

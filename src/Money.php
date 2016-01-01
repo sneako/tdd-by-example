@@ -6,5 +6,10 @@ class Money
     {
         return $this == $dollar;
     }
+
+    public static function dollar($amount)
+    {
+        return new Dollar($amount);
+    }
 }
 
