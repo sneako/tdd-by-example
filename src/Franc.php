@@ -1,6 +1,6 @@
 <?php namespace TDD;
 
-class Dollar extends Money
+class Franc extends Money
 {
     protected $amount;
 
@@ -11,7 +11,7 @@ class Dollar extends Money
 
     public function times($multiplier)
     {
-       return new Dollar($this->amount * $multiplier);
+       return new Franc($this->amount * $multiplier);
     }
 
     public function equals($dollar)
