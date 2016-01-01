@@ -23,6 +23,7 @@ class MoneyTest extends PHPUnit_Framework_TestCase
         $dollar = new Franc(5);
         $this->assertTrue($dollar->equals(new Franc(5)));
         $this->assertFalse($dollar->equals(new Franc(6)));
+        $this->assertFalse($dollar->equals(new Dollar(5)));
     }
 }
 
