@@ -5,7 +5,7 @@ use TDD\Franc;
 use TDD\Bank;
 use TDD\Sum;
 
-class MeneyTest extends PHPUnit_Framework_TestCase
+class MoneyTest extends PHPUnit_Framework_TestCase
 {
     public function testMultiplication()
     {
@@ -66,6 +66,34 @@ class MeneyTest extends PHPUnit_Framework_TestCase
         $bank->addRate("CHF", "USD", 2);
         $result = $bank->reduce(Money::franc(2), "USD");
         $this->assertEquals(Money::dollar(1), $result);
+    }
+
+    public function testIdentityRate()
+    {
+        $bank = new Bank();
+        $this->assertEquals(1, $bank->rate("USD", "USD"));
+    } 
+
+    public function testMixedAddition() 
+    {
+        $five_dollars = Money::dollar(5);
+        $ten_francs   = Money::franc(10);
+        $bank         = new Bank();
+        $bank->addRate("CHF", "USD", 2);
+        $result = $bank->reduce($five_dollars->plus($ten_francs), "USD");
+        $this->assertEquals(Money::dollar(10), $result);
+    }
+
+    public function testSumPlusMoney()
+    {
+        $five_bucks = Money::dollar(5);
+        $ten_francs = Money::franc(10);
+        $bank       = new Bank();
+        $bank->addRate("CHF", "USD", 2);
+        $sum = new Sum($five_bucks, $ten_francs);
+        $sum->plus($five_bucks);
+        $result = $bank->reduce($sum, "USD");
+        $this->assertEquals(Money::dollar(10), $result);
     }
 }
 

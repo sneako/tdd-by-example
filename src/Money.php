@@ -26,7 +26,7 @@ class Money implements Expression
        return new Money($this->amount * $multiplier, $this->currency);
     }
     
-    public function plus(Money $addend)
+    public function plus(Expression $addend)
     {
         return new Sum($this, $addend);
     }
@@ -43,7 +43,7 @@ class Money implements Expression
 
     public function reduce($bank, $to)
     {
-        $rate = ($this->currency == "CHF" && $to == "USD") ? 2 : 1;
+        $rate = $bank->rate($this->currency, $to);
         return new Money($this->amount / $rate, $to);
     }
 }
