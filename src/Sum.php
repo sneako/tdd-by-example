@@ -20,7 +20,12 @@ class Sum implements Expression
 
     public function plus(Expression $addend)
     {
-        return null;
+        return new Sum($this, $addend);
+    }
+
+    public function times($multiplier)
+    {
+        return new Sum($this->augend->times($multiplier), $this->addend->times($multiplier));
     }
 }
 
