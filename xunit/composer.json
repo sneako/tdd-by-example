@@ -1,0 +1,15 @@
+{
+    "name": "nicopiderman/xunit",
+    "authors": [
+        {
+            "name": "sneako",
+            "email": "nico.piderman@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+        "psr-4" : {
+            "XUnit\\": "src/"
+        }
+    } 
+}
