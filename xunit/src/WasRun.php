@@ -2,17 +2,26 @@
 
 class WasRun extends TestCase
 {
-    public $wasRun = null;
+    public $log = "";
 
     public function __construct($methodName)
     {
         $this->methodName = $methodName;
     }
 
-    public function testMethod()
+    public function setUp()
     {
-        $this->wasRun = 1;
+        $this->log .= "setUp ";
     }
 
+    public function testMethod()
+    {
+        $this->log .= "testMethod ";
+    }
+    
+    public function tearDown()
+    {
+        $this->log .= "tearDown ";
+    }
 }
 

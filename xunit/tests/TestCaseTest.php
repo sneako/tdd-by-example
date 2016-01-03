@@ -1,21 +1,21 @@
 <?php
-
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 use XUnit\TestCase;
 use XUnit\WasRun;
 
 class TestCaseTest extends TestCase
 {
-    public function testRunning()
+    public $test;
+
+    public function testTemplateMethod()
     {
-        $test = new WasRun("testMethod");
-        assert(!$test->wasRun);
-        $test->run();
-        assert($test->wasRun);
+        $this->test = new WasRun("testMethod");
+        $this->test->run();
+        assert($this->test->log === "setUp testMethod tearDown ");
     }
 }
 
-$test = new TestCaseTest("testRunning");
+$test = new TestCaseTest("testTemplateMethod");
 $test->run();
 

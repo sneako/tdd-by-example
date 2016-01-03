@@ -9,9 +9,20 @@ class TestCase
         $this->methodName = $methodName;
     }
 
+    public function setUp()
+    {
+    }
+
     public function run()
     {
+        $this->setUp();
         $this->{$this->methodName}();
+        $this->tearDown();
+    }
+
+    public function tearDown()
+    {
+
     }
 }
 
