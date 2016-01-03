@@ -1,5 +1,7 @@
 <?php namespace XUnit;
 
+use XUnit\TestResult;
+
 class TestCase
 {
     public $methodName;
@@ -13,11 +15,17 @@ class TestCase
     {
     }
 
-    public function run()
+    public function run($result)
     {
+        $result->testStarted();
         $this->setUp();
-        $this->{$this->methodName}();
+        try {
+            $this->{$this->methodName}();
+        } catch (\Exception $e) {
+            $result->testFailed();
+        }
         $this->tearDown();
+        return $result;
     }
 
     public function tearDown()
